@@ -9,7 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-app.post("/send-email", async (req, res) => {
+app.post("/api/send-email", async (req, res) => {
     const { name, email, message } = req.body;
 
     try {
