@@ -11,32 +11,6 @@ const Contact = () => {
   const [ref2, isIntersecting2] = useIntersectionObserver({ threshold: 0.1 })
   const [ref3, isIntersecting3] = useIntersectionObserver({ threshold: 0.1 })
 
-  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/send-email`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-      toast.success(data.message);
-      setFormData({ name: '', email: '', message: '' });
-    } catch (err) {
-      console.log(err);
-      toast.error("Error sending email");
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   const contactInfo = [
     {
@@ -93,10 +67,7 @@ const Contact = () => {
             Have a project in mind? Let's discuss how we can work together to bring your ideas to life and create something amazing.
           </p>
         </div>
-
-        {/* Main Content Grid - Responsive */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
-          {/* Contact Info - Enhanced Responsiveness */}
+        <div className="">
           <div
             ref={ref2}
             className={`fade-in-up ${isIntersecting2 ? 'animate-slide-up' : 'opacity-0'}`}
@@ -176,85 +147,6 @@ const Contact = () => {
                   Typically respond within 2 hours
                 </p>
               </div>
-            </div>
-          </div>
-
-          {/* Enhanced Contact Form - Responsive */}
-          <div
-            ref={ref3}
-            className={`fade-in-up ${isIntersecting3 ? 'animate-slide-up' : 'opacity-0'}`}
-          >
-            <div className="rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 shadow-lg sm:shadow-xl border border-gray-100 dark:border-gray-700 bg-white dark:bg-gray-800">
-              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-                <div className="space-y-2">
-                  <label htmlFor="name" className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
-                    Your Name
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-3 sm:px-4 py-3 sm:py-4 border border-gray-200 dark:border-gray-600 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-300 hover:border-gray-300 dark:hover:border-gray-500 shadow-sm text-sm sm:text-base"
-                    placeholder="Enter your full name"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="email" className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
-                    Email Address
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-3 sm:px-4 py-3 sm:py-4 border border-gray-200 dark:border-gray-600 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-300 hover:border-gray-300 dark:hover:border-gray-500 shadow-sm text-sm sm:text-base"
-                    placeholder="Enter your email address"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label htmlFor="message" className="block text-sm font-semibold text-gray-700 dark:text-gray-300">
-                    Your Message
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="3"
-                    value={formData.message}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-3 sm:px-4 py-3 sm:py-4 border border-gray-200 dark:border-gray-600 rounded-lg sm:rounded-xl focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 transition-all duration-300 hover:border-gray-300 dark:hover:border-gray-500 resize-none shadow-sm text-sm sm:text-base"
-                    placeholder="Tell me about your project..."
-                  ></textarea>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full group relative bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold py-3 sm:py-4 px-4 sm:px-6 rounded-lg sm:rounded-xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none text-sm sm:text-base"
-                >
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    {isSubmitting ? (
-                      <>
-                        <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        Send Message
-                        <span className="group-hover:translate-x-1 transition-transform duration-300 hidden sm:inline">→</span>
-                      </>
-                    )}
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500 to-blue-500 rounded-lg sm:rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </button>
-              </form>
             </div>
           </div>
         </div>
