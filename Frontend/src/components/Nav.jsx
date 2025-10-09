@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useDarkMode } from "../hooks/useDarkMode";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -24,13 +23,17 @@ const Navbar = () => {
   return (
     <>
       {/* Navbar Container */}
-      <nav className="fixed top-0 left-0 w-full z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-md">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-gray-900/95 backdrop-blur-md shadow-lg border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="font-extrabold text-2xl tracking-tight">
-              <span className="bg-gradient-to-r dark:from-yellow-300 dark:via-yellow-200 dark:to-yellow-300 bg-clip-text text-transparent animate-gradient-x">Tanish</span>
-              <span className="text-gray-900 dark:text-white"> Yadav</span>
+              <div className="flex flex-col">
+                <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent animate-gradient-x">
+                  Tanish <span className="text-white">Yadav</span>
+                </span>
+                <span className="text-xs text-gray-400 font-medium ml-1">Full Stack Developer</span>
+              </div>
             </div>
 
             {/* Desktop Links */}
@@ -40,7 +43,7 @@ const Navbar = () => {
                   key={link.href}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-yellow-300 transition-colors font-medium"
+                  className="text-gray-300 hover:text-yellow-400 transition-colors font-medium"
                 >
                   {link.label}
                 </a>
@@ -50,7 +53,7 @@ const Navbar = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+              className="md:hidden p-2 rounded-md text-gray-300 hover:bg-gray-800 transition"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
@@ -89,16 +92,17 @@ const Navbar = () => {
 
       {/* Mobile Menu (Slide In) */}
       <div
-        className={`fixed inset-y-0 right-0 w-64 bg-white dark:bg-gray-900 shadow-xl transform transition-transform duration-300 ease-in-out z-40 ${
+        className={`fixed inset-y-0 right-0 w-64 bg-gray-900 shadow-2xl transform transition-transform duration-300 ease-in-out z-40 ${
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex flex-col h-full p-6 space-y-6">
           <div className="font-extrabold text-2xl tracking-tight">
-            <span className="text-indigo-600 dark:text-yellow-300">Tanish</span>
-            <span className="text-gray-900 dark:text-white">Yadav</span>
+            <span className="text-yellow-400">Tanish</span>
+            <span className="text-gray-100"> Yadav</span>
           </div>
-          <div className="border-b border-gray-200 dark:border-gray-700"></div>
+
+          <div className="border-b border-gray-800"></div>
 
           {/* Mobile Links */}
           <div className="flex flex-col space-y-4 mt-2">
@@ -107,24 +111,24 @@ const Navbar = () => {
                 key={link.href}
                 href={link.href}
                 onClick={(e) => handleNavClick(e, link.href)}
-                className="text-gray-800 dark:text-gray-200 hover:text-indigo-600 dark:hover:text-yellow-300 text-lg font-medium transition-colors"
+                className="text-gray-300 hover:text-yellow-400 text-lg font-medium transition-colors"
               >
                 {link.label}
               </a>
             ))}
           </div>
 
-          <div className="mt-auto pt-6 border-t border-gray-200 dark:border-gray-700 text-sm text-gray-500 dark:text-gray-400">
+          <div className="mt-auto pt-6 border-t border-gray-800 text-sm text-gray-500">
             © {new Date().getFullYear()} Tanish Yadav
           </div>
         </div>
       </div>
 
-      {/* Background Overlay when Mobile Menu is open */}
+      {/* Background Overlay */}
       {isMobileMenuOpen && (
         <div
           onClick={() => setIsMobileMenuOpen(false)}
-          className="fixed inset-0 bg-black/40 backdrop-blur-sm md:hidden z-30"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm md:hidden z-30"
         ></div>
       )}
     </>

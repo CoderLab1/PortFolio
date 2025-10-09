@@ -1,85 +1,135 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 
 const Skills = () => {
-  const [ref1, isIntersecting1] = useIntersectionObserver()
-  const [ref2, isIntersecting2] = useIntersectionObserver()
+  const [headerRef, isHeaderIntersecting] = useIntersectionObserver({ threshold: 0.1 })
+  const [containerRef, isContainerIntersecting] = useIntersectionObserver({ threshold: 0.1 })
 
-  const skills = [
-    { name: 'React', level: 90, icon: '⚛️' },
-    { name: 'JavaScript', level: 95, icon: '🟨' },
-    { name: 'HTML/CSS', level: 95, icon: '🌐' },
-    { name: 'Node.js', level: 85, icon: '🟩' },
-    { name: 'MongoDB', level: 80, icon: '🍃' },
-    { name: 'UI/UX Design', level: 85, icon: '🎨' },
-  ]
+  const skills = useMemo(() => [
+    { name: 'React', level: 90, icon: '⚛️', color: 'from-cyan-500 to-blue-500' },
+    { name: 'JavaScript', level: 95, icon: '🟨', color: 'from-yellow-400 to-orange-500' },
+    { name: 'HTML/CSS', level: 95, icon: '🌐', color: 'from-orange-500 to-red-500' },
+    { name: 'Node.js', level: 85, icon: '🟩', color: 'from-green-500 to-emerald-500' },
+    { name: 'MongoDB', level: 80, icon: '🍃', color: 'from-green-400 to-teal-500' },
+    { name: 'UI/UX Design', level: 85, icon: '🎨', color: 'from-purple-500 to-pink-500' },
+  ], [])
 
   return (
-    <section id="skills" className="py-24 bg-gray-50 dark:bg-gray-900 relative overflow-hidden">
-      {/* Decorative background circles */}
-      <div className="absolute -top-16 -left-16 w-64 h-64 bg-gradient-to-br from-blue-900 to-purple-900 dark:from-blue-400 dark:to-purple-400 rounded-full opacity-20 animate-pulse"></div>
-      <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-gradient-to-br from-purple-900 to-pink-900 dark:from-purple-400 dark:to-pink-400 rounded-full opacity-20 animate-pulse"></div>
+    <section id="skills" className="py-24 bg-gray-900 text-white relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute -top-16 -left-16 w-64 h-64 bg-gradient-to-br from-blue-800 to-purple-800 rounded-full opacity-20 animate-float"></div>
+      <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-gradient-to-br from-purple-800 to-pink-800 rounded-full opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
+      <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-gradient-to-br from-cyan-800 to-blue-800 rounded-full opacity-10 animate-pulse"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="text-center mb-20">
           <h2
-            ref={ref1}
-            className={`fade-in text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 ${isIntersecting1 ? 'visible' : ''
+            ref={headerRef}
+            className={`text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 transition-all duration-700 transform ${isHeaderIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
               }`}
           >
             Skills & Expertise
           </h2>
           <p
-            className={`fade-in text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto ${isIntersecting1 ? 'visible' : ''
+            className={`text-lg md:text-xl text-gray-400 max-w-3xl mx-auto transition-all duration-700 delay-200 transform ${isHeaderIntersecting ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
               }`}
           >
             Here are the technologies and tools I work with to bring ideas to life.
           </p>
         </div>
 
-        {/* Skill Bars */}
-        <div className="grid md:grid-cols-2 gap-12">
-          <div ref={ref2} className={`fade-in space-y-6 ${isIntersecting2 ? 'visible' : ''}`}>
-            {skills.slice(0, 3).map((skill, index) => (
-              <SkillBar key={skill.name} skill={skill} />
-            ))}
-          </div>
-          <div className="fade-in space-y-6">
-            {skills.slice(3).map((skill, index) => (
-              <SkillBar key={skill.name} skill={skill} />
-            ))}
-          </div>
+        {/* Skills Grid */}
+        <div
+          ref={containerRef}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
+          {skills.map((skill, index) => (
+            <SkillBar
+              key={skill.name}
+              skill={skill}
+              index={index}
+              shouldAnimate={isContainerIntersecting}
+            />
+          ))}
         </div>
       </div>
     </section>
   )
 }
 
-const SkillBar = ({ skill }) => {
-  const [ref, isIntersecting] = useIntersectionObserver()
+const SkillBar = ({ skill, index, shouldAnimate }) => {
+  const [ref, isIntersecting] = useIntersectionObserver({ threshold: 0.3 })
+
+  const isVisible = shouldAnimate && isIntersecting
 
   return (
     <div
       ref={ref}
-      className="skill-item bg-white dark:bg-gray-800 rounded-xl p-4 shadow hover:shadow-lg transition-shadow duration-300"
+      className="group bg-gray-800/50 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-500 hover:scale-105 border border-gray-700 hover:border-gray-600"
+      style={{
+        animationDelay: `${index * 100}ms`
+      }}
     >
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <span className="text-lg">{skill.icon}</span>
-          <span className="text-gray-800 dark:text-gray-200 font-medium">{skill.name}</span>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-3">
+          <span className="text-2xl transition-transform duration-300 group-hover:scale-110">
+            {skill.icon}
+          </span>
+          <span className="text-white font-semibold text-lg">{skill.name}</span>
         </div>
-        <span className="text-gray-500 dark:text-gray-400 font-medium">{skill.level}%</span>
+        <span className="text-gray-300 font-medium bg-gray-700/50 px-3 py-1 rounded-full text-sm">
+          {skill.level}%
+        </span>
       </div>
-      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
+
+      <div className="w-full bg-gray-700/50 rounded-full h-3 overflow-hidden">
         <div
-          className={`bg-gradient-to-r from-indigo-500 to-purple-600 dark:from-yellow-400 dark:to-orange-500 h-3 rounded-full transform transition-all duration-1000 ${isIntersecting ? 'w-full' : 'w-0'
+          className={`h-3 rounded-full bg-gradient-to-r ${skill.color} transition-all duration-1000 ease-out ${isVisible ? 'w-full' : 'w-0'
             }`}
-          style={{ width: `${isIntersecting ? skill.level : 0}%` }}
-        ></div>
+          style={{
+            width: isVisible ? `${skill.level}%` : '0%',
+            transitionDelay: `${index * 150 + 300}ms`
+          }}
+        >
+          {/* Animated shine effect */}
+          <div className="h-full w-10 bg-white/20 animate-shine rounded-full transform skew-x-12"></div>
+        </div>
+      </div>
+
+      {/* Progress indicator dots */}
+      <div className="flex justify-between mt-2 px-1">
+        {[0, 25, 50, 75, 100].map((point) => (
+          <div
+            key={point}
+            className={`w-1 h-1 rounded-full ${skill.level >= point ? 'bg-gray-400' : 'bg-gray-600'
+              }`}
+          />
+        ))}
       </div>
     </div>
   )
 }
+
+
+<style jsx>{`
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) skewX(-12deg); }
+  100% { transform: translateX(200%) skewX(-12deg); }
+}
+
+.animate-float {
+  animation: float 8s ease-in-out infinite;
+}
+
+.animate-shine {
+  animation: shine 3s ease-in-out infinite;
+}
+      `}</style>
 
 export default Skills

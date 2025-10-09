@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 import profilePic from '../assets/image.png'
 import { FaLinkedin, FaGithub } from 'react-icons/fa'
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from 'react-hot-toast'
 
 const Hero = () => {
   const [ref, isIntersecting] = useIntersectionObserver()
@@ -23,15 +23,16 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className={`min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 text-white relative overflow-hidden transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'
-        }`}
+      className={`min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden transition-all duration-700 ${
+        isVisible ? 'opacity-100' : 'opacity-0'
+      }`}
     >
-      {/* Enhanced Background Pattern */}
+      {/* Background Pattern */}
       <div className="absolute inset-0 opacity-[0.03]">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)] bg-[size:64px_64px] animate-pulse-slow"></div>
       </div>
 
-      {/* Animated Gradient Orbs */}
+      {/* Glowing Gradient Orbs */}
       <div className="absolute -top-40 -left-40 w-80 h-80 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-full blur-3xl animate-float"></div>
       <div className="absolute -bottom-40 -right-40 w-80 h-80 bg-gradient-to-r from-yellow-500/20 to-pink-500/20 rounded-full blur-3xl animate-float-delayed"></div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
@@ -41,14 +42,15 @@ const Hero = () => {
           {/* Text Content */}
           <div
             ref={ref}
-            className={`fade-in text-center lg:text-left order-2 lg:order-1 ${isIntersecting ? 'visible' : ''
-              }`}
+            className={`fade-in text-center lg:text-left order-2 lg:order-1 ${
+              isIntersecting ? 'visible' : ''
+            }`}
           >
             <div className="space-y-6">
-              {/* Main Heading */}
+              {/* Heading */}
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
                 Hi, I'm{' '}
-                <span className="bg-gradient-to-r dark:from-yellow-300 dark:via-yellow-200 dark:to-yellow-300 bg-clip-text text-transparent animate-gradient-x">
+                <span className="bg-gradient-to-r from-yellow-300 via-yellow-200 to-yellow-300 bg-clip-text text-transparent animate-gradient-x">
                   Tanish
                 </span>
               </h1>
@@ -70,7 +72,7 @@ const Hero = () => {
                   href="/Tanish_Yadav_CV.pdf"
                   download="Tanish_Yadav_Resume.pdf"
                   onClick={() => toast.success('Downloading resume...')}
-                  className="group relative bg-gradient-to-r from-indigo-600 to-purple-600 dark:from-yellow-500 dark:to-yellow-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 text-center overflow-hidden"
+                  className="group relative bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 text-center overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <span className="relative">My Resume</span>
@@ -78,7 +80,7 @@ const Hero = () => {
                 <Toaster position="bottom-center" />
                 <button
                   onClick={(e) => handleNavClick(e, '#contact')}
-                  className="group relative border-2 border-indigo-400 dark:border-yellow-400 text-indigo-400 dark:text-yellow-400 px-8 py-4 rounded-xl font-semibold hover:bg-indigo-400 dark:hover:bg-yellow-400 hover:text-white dark:hover:text-gray-900 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 overflow-hidden"
+                  className="group relative border-2 border-yellow-400 text-yellow-400 px-8 py-4 rounded-xl font-semibold hover:bg-yellow-400 hover:text-gray-900 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 overflow-hidden"
                 >
                   <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   <span className="relative">Get In Touch</span>
@@ -89,13 +91,13 @@ const Hero = () => {
 
           {/* Profile Image */}
           <div
-            className={`fade-in mt-5 flex justify-center lg:justify-end order-1 lg:order-2 ${isIntersecting ? 'visible' : ''
-              }`}
+            className={`fade-in mt-5 flex justify-center lg:justify-end order-1 lg:order-2 ${
+              isIntersecting ? 'visible' : ''
+            }`}
           >
             <div className="relative w-64 sm:w-72 md:w-80 lg:w-96 group">
-              {/* Main Image Container */}
-              <div className="relative w-full aspect-square rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 dark:from-yellow-400 dark:to-orange-500 p-1 transform transition-transform duration-500">
-                <div className="w-full h-full rounded-full bg-gray-800 dark:bg-gray-700 overflow-hidden flex items-center justify-center ">
+              <div className="relative w-full aspect-square rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 p-1 transform transition-transform duration-500">
+                <div className="w-full h-full rounded-full bg-gray-800 overflow-hidden flex items-center justify-center">
                   <img
                     src={profilePic}
                     alt="Tanish Yadav"
@@ -110,7 +112,7 @@ const Hero = () => {
         {/* Social Icons */}
         <div className="mt-16 flex justify-center gap-6">
           <a
-            href="https://www.linkedin.com/in/tanish-yadav-811164253?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+            href="https://www.linkedin.com/in/tanish-yadav-811164253"
             target="_blank"
             rel="noopener noreferrer"
             className="group relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 backdrop-blur-sm"
@@ -124,7 +126,7 @@ const Hero = () => {
             href="https://github.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-gray-600 to-gray-900 text-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 backdrop-blur-sm"
+            className="group relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-gray-700 to-gray-900 text-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 backdrop-blur-sm"
             aria-label="Visit GitHub profile"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover:opacity-100 rounded-2xl transition-opacity duration-300"></div>
