@@ -23,9 +23,8 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className={`min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden transition-all duration-700 ${
-        isVisible ? 'opacity-100' : 'opacity-0'
-      }`}
+      className={`min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white relative overflow-hidden transition-all duration-700 ${isVisible ? 'opacity-100' : 'opacity-0'
+        }`}
     >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-[0.03]">
@@ -42,9 +41,8 @@ const Hero = () => {
           {/* Text Content */}
           <div
             ref={ref}
-            className={`fade-in text-center lg:text-left order-2 lg:order-1 ${
-              isIntersecting ? 'visible' : ''
-            }`}
+            className={`fade-in text-center lg:text-left order-2 lg:order-1 ${isIntersecting ? 'visible' : ''
+              }`}
           >
             <div className="space-y-6">
               {/* Heading */}
@@ -62,9 +60,9 @@ const Hero = () => {
 
               {/* Description */}
               <p className="text-lg sm:text-xl text-gray-400 mb-10 max-w-lg sm:max-w-xl lg:max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                I craft high-performing, user-focused web applications that help businesses
-                grow and users stay engaged. Let's collaborate to turn ideas into reality.
+                Crafting web experiences that engage users, accelerate growth, and bring your ideas to life.
               </p>
+
 
               {/* Buttons */}
               <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
@@ -91,9 +89,8 @@ const Hero = () => {
 
           {/* Profile Image */}
           <div
-            className={`fade-in mt-5 flex justify-center lg:justify-end order-1 lg:order-2 ${
-              isIntersecting ? 'visible' : ''
-            }`}
+            className={`fade-in mt-5 flex justify-center lg:justify-end order-1 lg:order-2 ${isIntersecting ? 'visible' : ''
+              }`}
           >
             <div className="relative w-64 sm:w-72 md:w-80 lg:w-96 group">
               <div className="relative w-full aspect-square rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 p-1 transform transition-transform duration-500">

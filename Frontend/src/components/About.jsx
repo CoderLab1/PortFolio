@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 
 const About = () => {
@@ -8,22 +8,22 @@ const About = () => {
 
   const services = [
     {
-      icon: '💻',
+      // icon: '💻',
       text: 'Full Stack Development',
       description: 'End-to-end web applications using modern technologies'
     },
     {
-      icon: '🎨',
+      // icon: '🎨',
       text: 'UI/UX Design',
       description: 'Beautiful and intuitive user interfaces and experiences'
     },
     {
-      icon: '📱',
+      // icon: '📱',
       text: 'Responsive Design',
       description: 'Perfectly optimized for all devices and screen sizes'
     },
     {
-      icon: '⚡',
+      // icon: '⚡',
       text: 'Performance Optimization',
       description: 'Lightning-fast applications with optimized performance'
     },
@@ -33,6 +33,21 @@ const About = () => {
     { number: '17+', label: 'Projects Completed', suffix: '' },
     { number: '8', label: 'Months', suffix: '+', sublabel: 'Experience' },
   ]
+
+  const [headerAnimated, setHeaderAnimated] = useState(false);
+  useEffect(() => {
+    if (isIntersecting1) setHeaderAnimated(true);
+  }, [isIntersecting1]);
+
+  const [paraAnimated, setParaAnimated] = useState(false);
+  useEffect(() => {
+    if (isIntersecting2) setParaAnimated(true);
+  }, [isIntersecting2]);
+
+  const [cardAnimated, setCardAnimated] = useState(false);
+  useEffect(() => {
+    if (isIntersecting3) setCardAnimated(true);
+  }, [isIntersecting3]);
 
   return (
     <section id="about" className="py-14 bg-gray-900 relative overflow-hidden">
@@ -52,14 +67,14 @@ const About = () => {
 
           <h2
             ref={ref1}
-            className={`fade-in-up text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-6 ${isIntersecting1 ? 'animate-slide-up' : ''}`}
+            className={`fade-in-up text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-6 ${headerAnimated ? 'animate-slide-up' : ''}`}
           >
             Crafting Digital Excellence
           </h2>
 
           <p
             ref={ref2}
-            className={`fade-in-up text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed ${isIntersecting2 ? 'animate-slide-up' : 'opacity-0'}`}
+            className={`fade-in-up text-xl md:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed ${paraAnimated ? 'animate-slide-up' : 'opacity-0'}`}
             style={{ animationDelay: '0.1s' }}
           >
             I'm a passionate <span className="font-semibold text-blue-400">full-stack developer</span> with a keen eye for design and a love for creating seamless user experiences that make a difference.
@@ -120,7 +135,7 @@ const About = () => {
 
           <div
             ref={ref3}
-            className={`fade-in ${isIntersecting3 ? 'animate-slide-up' : 'opacity-0'}`}
+            className={`fade-in ${cardAnimated ? 'animate-slide-up' : 'opacity-0'}`}
             style={{ animationDelay: '0.3s' }}
           >
             <div className="bg-gradient-to-br from-gray-800 to-gray-700 p-8 rounded-3xl shadow-xl border border-gray-600">
@@ -140,9 +155,6 @@ const About = () => {
                     key={index}
                     className="group flex items-start gap-6 p-6 bg-gray-800 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-600 hover:border-blue-800 hover:translate-x-2 cursor-pointer"
                   >
-                    <div className="w-14 h-14 bg-gradient-to-br from-blue-900/30 to-purple-900/30 rounded-2xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300 shadow-inner flex-shrink-0">
-                      {service.icon}
-                    </div>
                     <div className="flex-1 min-w-0">
                       <h5 className="font-semibold text-white text-xl mb-2 group-hover:text-blue-400 transition-colors leading-tight">
                         {service.text}

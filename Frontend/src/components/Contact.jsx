@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
 import { MdOutlineAttachEmail } from "react-icons/md"
 import { FaPhoneSquareAlt, FaWhatsapp } from "react-icons/fa"
@@ -7,6 +7,17 @@ import { IoLocationOutline } from "react-icons/io5"
 const Contact = () => {
   const [ref1, isIntersecting1] = useIntersectionObserver({ threshold: 0.1 })
   const [ref2, isIntersecting2] = useIntersectionObserver({ threshold: 0.1 })
+
+  const [headerAnimated, setHeaderAnimated] = useState(false);
+  useEffect(() => {
+    if (isIntersecting1) setHeaderAnimated(true);
+  }, [isIntersecting1]);
+
+  const [cardAnimated, setCardAnimated] = useState(false);
+  useEffect(() => {
+    if (isIntersecting2) setCardAnimated(true);
+  }, [isIntersecting2]);
+
 
   const contactInfo = [
     {
@@ -47,29 +58,30 @@ const Contact = () => {
 
           <h2
             ref={ref1}
-            className={`fade-in-up text-4xl md:text-5xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-6 ${isIntersecting1 ? 'animate-slide-up' : ''}`}
+            className={`fade-in-up text-4xl md:text-5xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-6 ${headerAnimated ? 'animate-slide-up' : ''}`}
           >
             Let's Work Together
           </h2>
 
           <p
-            className={`fade-in-up text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed ${isIntersecting1 ? 'animate-slide-up' : 'opacity-0'}`}
+            className={`fade-in-up text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed ${headerAnimated ? 'animate-slide-up' : 'opacity-0'}`}
           >
             Have a project in mind? Let's discuss how we can work together to bring your ideas to life and create something amazing.
           </p>
+
         </div>
 
         <div
           ref={ref2}
-          className={`fade-in-up ${isIntersecting2 ? 'animate-slide-up' : 'opacity-0'}`}
+          className={`fade-in-up ${cardAnimated ? 'animate-slide-up' : 'opacity-0'}`}
         >
           <div className="relative rounded-3xl p-8 shadow-2xl border border-gray-700 bg-gray-800 backdrop-blur-sm bg-opacity-95">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 mb-8">
+            <div className="flex flex-col items-center sm:flex-row sm:items-center sm:justify-between gap-6 mb-8">
               <div className="flex-1">
                 <h3 className="text-3xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-2">
                   Let's Connect
                 </h3>
-                <div className="w-20 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"></div>
+                <div className="w-44 ml-1 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-full"></div>
               </div>
 
               <a

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
+const navLinks = [
+  { href: "#home", label: "Home" },
+  { href: "#about", label: "About" },
+  { href: "#skills", label: "Skills" },
+  { href: "#projects", label: "Projects" },
+  { href: "#contact", label: "Contact" },
+];
+
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const navLinks = [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About" },
-    { href: "#skills", label: "Skills" },
-    { href: "#projects", label: "Projects" },
-    { href: "#contact", label: "Contact" },
-  ];
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
@@ -19,6 +19,38 @@ const Navbar = () => {
     }
     setIsMobileMenuOpen(false);
   };
+
+  const MenuIcon = ({ open }) => (
+    <svg
+      className="w-6 h-6"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d={
+          open
+            ? "M6 18L18 6M6 6l12 12"
+            : "M4 6h16M4 12h16M4 18h16"
+        }
+      ></path>
+    </svg>
+  );
+
+  const renderLinks = (className) =>
+    navLinks.map((link) => (
+      <a
+        key={link.href}
+        href={link.href}
+        onClick={(e) => handleNavClick(e, link.href)}
+        className={className}
+      >
+        {link.label}
+      </a>
+    ));
 
   return (
     <>
@@ -32,22 +64,15 @@ const Navbar = () => {
                 <span className="font-extrabold text-xl tracking-tight bg-gradient-to-r from-yellow-400 via-yellow-300 to-yellow-500 bg-clip-text text-transparent animate-gradient-x">
                   Tanish <span className="text-white">Yadav</span>
                 </span>
-                <span className="text-xs text-gray-400 font-medium ml-1">Full Stack Developer</span>
+                <span className="text-xs text-gray-400 font-medium ml-1">
+                  Full Stack Developer
+                </span>
               </div>
             </div>
 
             {/* Desktop Links */}
             <div className="hidden md:flex items-center space-x-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-gray-300 hover:text-yellow-400 transition-colors font-medium"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {renderLinks("text-gray-300 hover:text-yellow-400 transition-colors font-medium")}
             </div>
 
             {/* Mobile Menu Button */}
@@ -56,35 +81,7 @@ const Navbar = () => {
               className="md:hidden p-2 rounded-md text-gray-300 hover:bg-gray-800 transition"
               aria-label="Toggle menu"
             >
-              {isMobileMenuOpen ? (
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M6 18L18 6M6 6l12 12"
-                  ></path>
-                </svg>
-              ) : (
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4 6h16M4 12h16M4 18h16"
-                  ></path>
-                </svg>
-              )}
+              <MenuIcon open={isMobileMenuOpen} />
             </button>
           </div>
         </div>
@@ -106,16 +103,7 @@ const Navbar = () => {
 
           {/* Mobile Links */}
           <div className="flex flex-col space-y-4 mt-2">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={(e) => handleNavClick(e, link.href)}
-                className="text-gray-300 hover:text-yellow-400 text-lg font-medium transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
+            {renderLinks("text-gray-300 hover:text-yellow-400 text-lg font-medium transition-colors")}
           </div>
 
           <div className="mt-auto pt-6 border-t border-gray-800 text-sm text-gray-500">

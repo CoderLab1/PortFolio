@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react'
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver'
+import { useState, useEffect } from 'react';
+
 
 const Skills = () => {
   const [headerRef, isHeaderIntersecting] = useIntersectionObserver({ threshold: 0.1 })
@@ -19,7 +21,6 @@ const Skills = () => {
       {/* Animated background elements */}
       <div className="absolute -top-16 -left-16 w-64 h-64 bg-gradient-to-br from-blue-800 to-purple-800 rounded-full opacity-20 animate-float"></div>
       <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-gradient-to-br from-purple-800 to-pink-800 rounded-full opacity-20 animate-float" style={{ animationDelay: '2s' }}></div>
-      <div className="absolute top-1/2 left-1/4 w-32 h-32 bg-gradient-to-br from-cyan-800 to-blue-800 rounded-full opacity-10 animate-pulse"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
@@ -57,11 +58,22 @@ const Skills = () => {
     </section>
   )
 }
-
 const SkillBar = ({ skill, index, shouldAnimate }) => {
+
+
   const [ref, isIntersecting] = useIntersectionObserver({ threshold: 0.3 })
 
-  const isVisible = shouldAnimate && isIntersecting
+  // Track if animation has already played
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    if (shouldAnimate && isIntersecting) {
+      setHasAnimated(true); // Trigger animation once
+    }
+  }, [shouldAnimate, isIntersecting]);
+
+  const isVisible = hasAnimated;
+
 
   return (
     <div
@@ -110,7 +122,6 @@ const SkillBar = ({ skill, index, shouldAnimate }) => {
     </div>
   )
 }
-
 
 <style jsx>{`
 @keyframes float {
