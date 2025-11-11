@@ -67,7 +67,7 @@ const Hero = () => {
               {/* Buttons */}
               <div className="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
                 <a
-                  href="/Tanish_Yadav_CV.pdf"
+                  href="/TANISH_YADAV_RESUME.pdf"
                   download="Tanish_Yadav_Resume.pdf"
                   onClick={() => toast.success('Downloading resume...')}
                   className="group relative bg-gradient-to-r from-yellow-500 to-yellow-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-1 text-center overflow-hidden"
