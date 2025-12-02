@@ -69,7 +69,7 @@ const About = () => {
             ref={ref1}
             className={`fade-in-up text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-6 ${headerAnimated ? 'animate-slide-up' : ''}`}
           >
-            Crafting Digital Excellence
+            Full stack developer 
           </h2>
 
           <p
